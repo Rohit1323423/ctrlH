@@ -1,0 +1,3 @@
+function addfun(){
+	alert("working");	
+}

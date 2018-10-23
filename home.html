@@ -3,15 +3,26 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
+
 <body>
-<h1>ctrlH</h1>
-<br>
-  <input type="text" id="UserInput">
-  <input type="button" onclick="addfun()" value="Add">
-  <p>This is your Todo So Far</p>
-    <ul id="myList">
-    </ul>
+<div class="w3-card-4">
+  <div class="w3-container w3-brown">
+    <h2>ctrl_H</h2>
+  </div>
+
+    <p>
+        <label class="w3-text-brown"><b>What you want to accomplish</b></label>
+        <input class="w3-input w3-border w3-sand" id="UserInput" type="text">
+    </p>
+    <p>
+        <input type="button" onclick="addfun()" value="Add">
+    </p>
+    <p>This is your Todo So Far</p>
+      <ul id="myList">
+      </ul>
+</div>
+<script src="adding.js"></script>
 </body>
-  <script src="adding.js"></script>
 </html>

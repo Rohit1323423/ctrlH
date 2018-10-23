@@ -25,6 +25,7 @@ window.onload=function(){
 	}
 }
 function addfun() {
+
 	//localStorage.clear();
 	let arr = JSON.parse(localStorage.getItem("name"));
 	if(arr==null)	{
@@ -39,6 +40,7 @@ function addfun() {
 	}
 	console.log("counter = " + localStorage.getItem("counter"));
 	arr.push(document.getElementById("UserInput").value);
+		document.getElementById("UserInput").value="";
 	localStorage.setItem("name",JSON.stringify(arr));
 	let chola=JSON.parse(localStorage.getItem("name"));
 

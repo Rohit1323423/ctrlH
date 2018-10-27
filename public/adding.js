@@ -1,8 +1,9 @@
+
 window.onload=function(){
 	//localStorage.clear();
 	console.log(localStorage.length);
 	let arr = JSON.parse(localStorage.getItem("name"));
-	if(arr==null)	{
+	if(arr==null )	{
 		console.log("empty list");
 	}else {
 		let chola=JSON.parse(localStorage.getItem("name"));
@@ -25,22 +26,12 @@ window.onload=function(){
 	}
 }
 function addfun() {
-
-	//localStorage.clear();
 	let arr = JSON.parse(localStorage.getItem("name"));
-	if(arr==null)	{
-		arr=[];
-	}
-	let counter=JSON.parse(localStorage.getItem("counter"));
-	if(counter!=0){
-			localStorage.setItem("counter",JSON.stringify(counter+1));
-	}
-	else{
-		localStorage.setItem("counter","1");
-	}
-	console.log("counter = " + localStorage.getItem("counter"));
-	arr.push(document.getElementById("UserInput").value);
-		document.getElementById("UserInput").value="";
+	if(arr==null)
+			arr=[];
+	if(document.getElementById("UserInput").value!="")
+			arr.push(document.getElementById("UserInput").value);
+	document.getElementById("UserInput").value="";
 	localStorage.setItem("name",JSON.stringify(arr));
 	let chola=JSON.parse(localStorage.getItem("name"));
 

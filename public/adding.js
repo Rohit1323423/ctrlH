@@ -26,6 +26,25 @@ window.onload=function(){
 	}
 }
 function addfun() {
+	var db = firebase.firestore();
+	db.collection("cities").doc("LA").set({
+	    name: "Lucknow",
+	    state: "chennai",
+	    country: "USA"
+	})
+	.then(function() {
+	    console.log("Document successfully written!");
+	})
+	.catch(function(error) {
+	    console.error("Error writing document: ", error);
+	});
+
+	db.collection("cities").doc("LA")
+    .onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+    });
+
+
 	let arr = JSON.parse(localStorage.getItem("name"));
 	if(arr==null)
 			arr=[];

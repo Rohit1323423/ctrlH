@@ -27,7 +27,7 @@ window.onload=function(){
 }
 function addfun() {
 	var db = firebase.firestore();
-	db.collection("cities").doc("LA").set({
+	db.collection("cities").doc("LA").collection("pakistan").doc("namespace").set({
 	    name: "Lucknow",
 	    state: "chennai",
 	    country: "USA"

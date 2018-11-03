@@ -3,20 +3,23 @@ function signup(){
   password=document.getElementById('password').value;
   var db = firebase.firestore();
 //---------------------------------------//
-let stopping=9;
+var stopping=9;
+console.log("before " ,stopping);
   db.collection("users").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
         if(email==doc.data().email && password==doc.data().password){
-            console.log("found data");
-            window.location="home.html";
+            console.log("found data in database... already present" , doc.data());
             stopping=1;
           }
       });
   });
-
+  console.log("after " ,stopping);
+  if(stopping===1){
+      alert("already have an account");
+  }
   if(stopping!=1){
-      alert("script runnign");
+      alert("registering you in our database");
       db.collection("users").add({
           email : email ,
           password : password

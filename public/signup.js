@@ -15,19 +15,21 @@ console.log("before " ,stopping);
       });
       if(stopping==1){
           alert("already have an account");
+          window.location="home.html";
       }
       else{
-          alert("registering you in our database");
           db.collection("users").add({
               email : email ,
               password : password
           })
           .then(function() {
-              console.log("Document successfully written!");
+              alert("registering you in our database");
+              window.location="home.html";
           })
           .catch(function(error) {
               console.error("Error writing document: ", error);
           });
+
         }
   }
 );

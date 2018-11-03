@@ -3,7 +3,7 @@ function signup(){
   password=document.getElementById('password').value;
   var db = firebase.firestore();
 //---------------------------------------//
-let stopping;
+let stopping=9;
   db.collection("users").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
@@ -15,23 +15,17 @@ let stopping;
       });
   });
 
-if(stopping==1)
-  return true;
-
-alert("script runnign");
-
-  db.collection("users").add({
-    email : email ,
-    password : password
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
-
-
-
-
+  if(stopping!=1){
+      alert("script runnign");
+      db.collection("users").add({
+          email : email ,
+          password : password
+      })
+      .then(function() {
+          console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+    }
 }

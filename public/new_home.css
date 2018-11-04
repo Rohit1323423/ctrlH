@@ -4,6 +4,8 @@ body {
   padding-top: 20px;
   padding-right: 199px;
   min-width: 250px;
+    font-family: 'Mali', cursive;
+    font-family: 'Poor Story', cursive;
 }
 
 /* Include the padding and border in an element's total width and height */

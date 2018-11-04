@@ -1,10 +1,11 @@
 
 // Create a "close" button and append it to each list item
+// this will be done for each and every element of li items.
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
   var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
+  var txt = document.createTextNode("Erase");
   span.className = "close";
   span.appendChild(txt);
   myNodelist[i].appendChild(span);
@@ -42,7 +43,8 @@ function addfun() {
   document.getElementById("UserInput").value = "";
 
   var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
+  //var txt = document.createTextNode("\u00D7");
+  var txt = document.createTextNode("Erase");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);

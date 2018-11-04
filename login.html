@@ -1,0 +1,34 @@
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </head>
+  <body>
+      <h1>Login</h1>
+      <input type="text" id="username"><br>
+      <input type="text" id="password"><br>
+      <button type="button" name="Login" onclick="login()">Log in</button>
+      <h1><p id="Errorinfo"></p></h1>
+      <br><br>
+      <h1>Or signup if you don't have account with us<h1><br>
+      <a href="signup.html">Sign Up</a>
+      <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBFh3kr3uTo9bcz0I9R6LPExYMJeC37QXg",
+          authDomain: "ctrlh-e7f8b.firebaseapp.com",
+          databaseURL: "https://ctrlh-e7f8b.firebaseio.com",
+          projectId: "ctrlh-e7f8b",
+          storageBucket: "ctrlh-e7f8b.appspot.com",
+          messagingSenderId: "983119323534"
+        };
+        firebase.initializeApp(config);
+      </script>
+      <script src="login.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -3,12 +3,18 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <style>
+  .todosection{
+    color : blue ;
+    float : right;
+  }
+  </style>
 </head>
 
 <body>
-<div class="w3-card-4">
-  <div class="w3-container w3-brown">
+<div class="w3-card-4" >
+  <div class="w3-container w3-brown" style ="float : left">
     <h2>ctrl_H</h2>
   </div>
 
@@ -19,9 +25,8 @@
     <p>
         <input type="button" onclick="addfun()" value="Add">
     </p>
-    <p>This is your Todo So Far</p>
-      <ul id="myList">
-      </ul>
+    <div class="todosection"><p>This is your Todo So Far</p>
+      <ul id="myList"></ul></div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
 

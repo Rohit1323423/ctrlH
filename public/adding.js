@@ -1,4 +1,3 @@
-
 window.onload=function(){
 	//localStorage.clear();
 	console.log(localStorage.length);

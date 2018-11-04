@@ -9,13 +9,13 @@ function login() {
         // doc.data() is never undefined for query doc snapshots
         if(email==doc.data().email && password==doc.data().password){
             console.log("found data");
-            window.location="home.html";
+            window.location="new_home.html";
             stopping=1;
           }
       });
   });
   if(shopping==1)
-      window.location="home.html";
+      window.location="new_home.html";
   else
       document.getElementById('Errorinfo').innerHTML="No Username mapped with this account";
 }

@@ -15,7 +15,7 @@ console.log("before " ,stopping);
       });
       if(stopping==1){
           alert("already have an account");
-          window.location="home.html";
+          window.location="new_home.html";
       }
       else{
           db.collection("users").add({
@@ -24,7 +24,7 @@ console.log("before " ,stopping);
           })
           .then(function() {
               alert("registering you in our database");
-              window.location="home.html";
+              window.location="new_home.html";
           })
           .catch(function(error) {
               console.error("Error writing document: ", error);

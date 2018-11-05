@@ -1,6 +1,6 @@
 // Create a "close" button and append it to each list item
 // this will be done for each and every element of li items.
-var current_user="piy";
+var current_user="a";
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
@@ -16,25 +16,77 @@ var close = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
+
     var div = this.parentElement;
     div.style.display = "none";
   }
 }
-
+function clean(parameter){
+    let ret="";
+    let i=0;
+    while(parameter[i]!='<'){
+      ret+=parameter[i++];
+    }
+    return ret;
+}
+//HOW the heck other list element gets checked when it's not set
 // Add a "checked" symbol when clicking on a list item
+
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
+     ev.target.classList.toggle('checked');
+     let clean_check=clean(ev.target.innerHTML);
+
+     // upaating checked to firebase
+     var db=firebase.firestore();
+     db.collection("users").where("email", "==", current_user)
+     .get()
+     .then(function(querySnapshot) {
+         querySnapshot.forEach(function(doc) {
+           var refrence=db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos");
+           db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
+               .then(function(querySnapshot) {
+                     querySnapshot.forEach(function(doc) {
+                       //if(doc.data().content==e)
+                       //alert(doc.data().content);
+                      if(doc.data().content==clean_check){
+                        //now update check or uncheck
+                        refrence.doc(doc.id).update({
+                            "checked" : "1"
+                        }).then(function(){
+                          console.log("updated  yess");
+                        });
+                      }
+
+                     })
+                });
+         });
+      })
+     .catch(function(error) {
+       console.log("cannnot find username with ur username");
+     });
+
+
+
   }
 }, false);
+
+
+// db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").update({
+//      checked : "1"
+// })
+// .then(function() {
+//    console.log("Document successfully updated!");
+//  });
+
 
 
 window.onload=function () {
   console.log("page is loaded first time");
   var db = firebase.firestore();
 
-  db.collection("users").where("email", "==", "piy")
+  db.collection("users").where("email", "==", current_user)
   .get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
@@ -61,6 +113,7 @@ window.onload=function () {
                           div.style.display = "none";
                         }
                       }
+
                   })
              });
       });
@@ -95,11 +148,23 @@ function addfun() {
     document.getElementById("myList").appendChild(li);
   }
   document.getElementById("UserInput").value = "";
+  var span = document.createElement("SPAN");
+  //var txt = document.createTextNode("\u00D7");
+  var txt = document.createTextNode("Erase");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
 
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
   // uploading to firebase now
   console.log(timestamp);
   var db = firebase.firestore();
-  db.collection("users").where("email", "==", "piy")
+  db.collection("users").where("email", "==", current_user)
   .get()
   .then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
@@ -122,18 +187,4 @@ function addfun() {
   });
 
 // uploading finished
-
-  var span = document.createElement("SPAN");
-  //var txt = document.createTextNode("\u00D7");
-  var txt = document.createTextNode("Erase");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
 }

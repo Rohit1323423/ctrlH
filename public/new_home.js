@@ -1,6 +1,6 @@
-
 // Create a "close" button and append it to each list item
 // this will be done for each and every element of li items.
+var current_user="piy";
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
@@ -20,7 +20,7 @@ for (i = 0; i < close.length; i++) {
     div.style.display = "none";
   }
 }
-
+alert("its me");
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
@@ -31,15 +31,17 @@ list.addEventListener('click', function(ev) {
 
 
 window.onload=function () {
-  alert("first");
+  console.log("page is loaded first time");
   var db = firebase.firestore();
   db.collection("users").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
-        console.log("Reading data when page is loaded first time");
+        console.log("differnt users registered with us");
         console.log(doc.data().email);
       });
-  });
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+    });
 }
 var date=new Date();
 var month=date.getMonth()+1;
@@ -59,7 +61,7 @@ function addfun() {
   var t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue === '') {
-    alert("You must write something!");
+    //alert("You must write something!");
   } else {
     document.getElementById("myList").appendChild(li);
   }
@@ -68,7 +70,7 @@ function addfun() {
   // uploading to firebase now
   console.log(timestamp);
   var db = firebase.firestore();
-  db.collection("users").where("email", "==", "a")
+  db.collection("users").where("email", "==", "piy")
   .get()
   .then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {

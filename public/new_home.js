@@ -29,6 +29,29 @@ list.addEventListener('click', function(ev) {
   }
 }, false);
 
+
+window.onload=function () {
+  alert("first");
+  var db = firebase.firestore();
+  db.collection("users").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log("Reading data when page is loaded first time");
+        console.log(doc.data().email);
+      });
+  });
+}
+var date=new Date();
+var month=date.getMonth()+1;
+if(month<10){
+  month="0"+month;
+}
+var day=date.getDate();
+if(date.getDate()<10){
+  day="0"+date.getDate();
+}
+var timestamp=""+date.getFullYear()+month+day;
+
 // Create a new list item when clicking on the "Add" button
 function addfun() {
   var li = document.createElement("li");
@@ -41,6 +64,35 @@ function addfun() {
     document.getElementById("myList").appendChild(li);
   }
   document.getElementById("UserInput").value = "";
+
+  // uploading to firebase now
+  console.log(timestamp);
+  var db = firebase.firestore();
+  db.collection("users").where("email", "==", "a")
+  .get()
+  .then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+      //db.collection("users").doc(doc.id).set
+
+      db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").add({
+          checked : "0" ,
+          content : inputValue
+      })
+      .then(function() {
+          console.log("your current to do went to database");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+
+      //console.log(doc.id, " => ", doc.id);
+  });
+  })
+  .catch(function(error) {
+    console.log("cannnot find username with ur username");
+  });
+
+
 
   var span = document.createElement("SPAN");
   //var txt = document.createTextNode("\u00D7");

@@ -85,11 +85,9 @@ window.onload=function () {
   .get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        alert("first" + doc.id);
         db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
             .then(function(querySnapshot) {
                   querySnapshot.forEach(function(doci) {
-                      alert("second  " + doci.data().content);
 
                       //rendering element for ths first time from database
                       var li = document.createElement("li");
@@ -103,31 +101,20 @@ window.onload=function () {
                       span.className = "close";
                       span.appendChild(txt);
                       li.appendChild(span);
-
-
-
-
-                      for (i = 0; i < close.length; i++) {
-                        close[i].onclick = function() {
-                            var div = this.parentElement;
-                            div.style.display = "none";
-
-                            let toremove=clean(div.innerHTML);
-                            console.log("bolo " ,toremove);
-
-                            db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").doc(doci.id).delete()
+                      span.onclick=function(){
+                      var div = this.parentElement;
+                      div.style.display = "none";
+                      let toremove=clean(div.innerHTML);
+                      db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").doc(doci.id).delete()
                             .then(function() {
                                 console.log("Document successfully deleted!");
-                                 })
+                                })
                             .catch(function(error) {
                                 console.error("Error removing document: ", error);
-                                 });
+                                });
+                      }
+                      //onclick ends
 
-
-                          }
-                          //end of onclick function
-                       }
-                      //end of for loop
 
                   })
              });

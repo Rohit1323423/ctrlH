@@ -16,11 +16,14 @@ var close = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
-
     var div = this.parentElement;
     div.style.display = "none";
   }
 }
+
+// This function is used to find out what the inner element of list item is so ..
+//it can be used to remove element in firebase firestore
+
 function clean(parameter){
     let ret="";
     let i=0;
@@ -29,9 +32,10 @@ function clean(parameter){
     }
     return ret;
 }
+
+
 //HOW the heck other list element gets checked when it's not set
 // Add a "checked" symbol when clicking on a list item
-
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
@@ -66,37 +70,30 @@ list.addEventListener('click', function(ev) {
      .catch(function(error) {
        console.log("cannnot find username with ur username");
      });
-
-
-
   }
 }, false);
 
-
-// db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").update({
-//      checked : "1"
-// })
-// .then(function() {
-//    console.log("Document successfully updated!");
-//  });
-
+function close_fun(paramp){
+  alert(paramp.data().content);
+}
 
 
 window.onload=function () {
   console.log("page is loaded first time");
   var db = firebase.firestore();
-
   db.collection("users").where("email", "==", current_user)
   .get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        //db.collection("users").doc(doc.id).set
+        alert("first" + doc.id);
         db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
             .then(function(querySnapshot) {
-                  querySnapshot.forEach(function(doc) {
-                      console.log(doc.data().content);
+                  querySnapshot.forEach(function(doci) {
+                      alert("second  " + doci.data().content);
+
+                      //rendering element for ths first time from database
                       var li = document.createElement("li");
-                      var inputValue = doc.data().content;
+                      var inputValue = doci.data().content;
                       var t = document.createTextNode(inputValue);
                       li.appendChild(t);
                       document.getElementById("myList").appendChild(li);
@@ -107,12 +104,30 @@ window.onload=function () {
                       span.appendChild(txt);
                       li.appendChild(span);
 
+
+
+
                       for (i = 0; i < close.length; i++) {
                         close[i].onclick = function() {
-                          var div = this.parentElement;
-                          div.style.display = "none";
-                        }
-                      }
+                            var div = this.parentElement;
+                            div.style.display = "none";
+
+                            let toremove=clean(div.innerHTML);
+                            console.log("bolo " ,toremove);
+
+                            db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").doc(doci.id).delete()
+                            .then(function() {
+                                console.log("Document successfully deleted!");
+                                 })
+                            .catch(function(error) {
+                                console.error("Error removing document: ", error);
+                                 });
+
+
+                          }
+                          //end of onclick function
+                       }
+                      //end of for loop
 
                   })
              });
@@ -123,7 +138,7 @@ window.onload=function () {
   });
 }
 
-
+// Creating date to be used to store todos corresponding to that date
 var date=new Date();
 var month=date.getMonth()+1;
 if(month<10){
@@ -134,6 +149,8 @@ if(date.getDate()<10){
   day="0"+date.getDate();
 }
 var timestamp=""+date.getFullYear()+month+day;
+
+
 
 // Create a new list item when clicking on the "Add" button
 function addfun() {
@@ -168,7 +185,6 @@ function addfun() {
   .get()
   .then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-      //db.collection("users").doc(doc.id).set
       db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").add({
           checked : "0" ,
           content : inputValue
@@ -178,13 +194,11 @@ function addfun() {
           })
       .catch(function(error) {
           console.error("Error writing document: ", error);
-      });
-      //console.log(doc.id, " => ", doc.id);
-  });
+          });
+       });
   })
   .catch(function(error) {
     console.log("cannnot find username with ur username");
-  });
-
+   });
 // uploading finished
 }

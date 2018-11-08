@@ -46,21 +46,28 @@ list.addEventListener('click', function(ev) {
      var db=firebase.firestore();
      db.collection("users").where("email", "==", current_user)
      .get()
-     .then(function(querySnapshot) {
+     .then(function(querySnapshot){
          querySnapshot.forEach(function(doc) {
            var refrence=db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos");
            db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
                .then(function(querySnapshot) {
                      querySnapshot.forEach(function(doc) {
-                       //if(doc.data().content==e)
-                       //alert(doc.data().content);
                       if(doc.data().content==clean_check){
-                        //now update check or uncheck
-                        refrence.doc(doc.id).update({
-                            "checked" : "1"
-                        }).then(function(){
-                          console.log("updated  yess");
-                        });
+                        if(doc.data().checked=="0"){
+                          refrence.doc(doc.id).update({
+                              "checked" : "1"
+                          }).then(function(){
+                            console.log("updated  yess");
+                          });
+                        }
+                        else{
+                          refrence.doc(doc.id).update({
+                              "checked" : "0"
+                          }).then(function(){
+                            console.log("updated  yess");
+                          });
+                        }
+
                       }
 
                      })
@@ -124,6 +131,7 @@ window.onload=function () {
     console.log("cannnot find username with ur username");
   });
 }
+//onload function (anonymous) ends
 
 // Creating date to be used to store todos corresponding to that date
 var date=new Date();
@@ -165,8 +173,8 @@ function addfun() {
       div.style.display = "none";
     }
   }
+
   // uploading to firebase now
-  console.log(timestamp);
   var db = firebase.firestore();
   db.collection("users").where("email", "==", current_user)
   .get()

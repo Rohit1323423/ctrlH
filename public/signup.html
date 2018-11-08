@@ -8,7 +8,7 @@
 <style>
   .box {
     width: 500px;
-    margin: 200px 0;
+    margin: 110px 0;
 }
 
 .shape1{
@@ -85,14 +85,17 @@
     z-index: 2;
 }
 
+body{
+background-image: url("backg.jpg");
+}
 .form {
     margin-left: 159px;
-    margin-top: 46px;
+    margin-top: 15px;
 }
   </style>
 </head>
 <body>
-  <centre><h1>Signup</h2>
+  <br><br><center><h1 style="color : #FFFFFF">Signup</h2></center>
 <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
@@ -115,7 +118,7 @@
                                 <input type="text" name="password" id="password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <button type="button" name="Login" onclick="signup()" class="btn btn-info btn-md">Sign Up</button>
+                                <center><button type="button" name="Login" onclick="signup()" class="btn btn-info btn-md">Sign Up</button></center>
                             </div>
                         </form>
                     </div>
@@ -123,6 +126,8 @@
             </div>
         </div>
     </div>
+    <br>
+    <center><h3>Or already have account <h3><a style="color : white" href="login.html">Log In</a></center>
 
     <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
 

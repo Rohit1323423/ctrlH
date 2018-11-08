@@ -4,6 +4,8 @@ body {
   padding-top: 20px;
   padding-right: 199px;
   min-width: 250px;
+    font-family: 'Mali', cursive;
+    font-family: 'Poor Story', cursive;
 }
 
 /* Include the padding and border in an element's total width and height */
@@ -80,7 +82,7 @@ ul li.checked::before {
 
 /* Style the header */
 .header {
-  background-color: #C7223B;
+  background-color: #6600ff;
   padding: 30px 40px;
   color: white;
   text-align: center;

@@ -2,7 +2,7 @@ function login() {
   email=document.getElementById('username').value;
   password=document.getElementById('password').value;
 
-  if(email!="" && password!=""){
+  if(email!="" || password!=""){
     var db = firebase.firestore();
     let shopping=9 ;
     db.collection("users").get().then(function(querySnapshot) {

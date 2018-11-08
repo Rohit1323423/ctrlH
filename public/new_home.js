@@ -89,6 +89,8 @@ window.onload = function() {
             });
           });
       });
+
+      //event listner to mark it done or pending ..
       var list = document.querySelector("ul");
       list.addEventListener("click", function(ev) {
           ev.stopPropagation();
@@ -152,18 +154,19 @@ window.onload = function() {
 // Creating date to be used to store todos corresponding to that date
 var date = new Date();
 var month = date.getMonth() + 1;
-if (month < 10) {
-  month = "0" + month;
-}
+  if (month < 10) {
+    month = "0" + month;
+  }
 var day = date.getDate();
-if (date.getDate() < 10) {
-  day = "0" + date.getDate();
-}
+  if (date.getDate() < 10) {
+    day = "0" + date.getDate();
+  }
 var timestamp = "" + date.getFullYear() + month + day;
 
+
 // Create a new list item when clicking on the "Add" button
+
 function addfun() {
-  //creating element dynamically to insert
   var li = document.createElement("li");
   var inputValue = document.getElementById("UserInput").value;
   var t = document.createTextNode(inputValue);

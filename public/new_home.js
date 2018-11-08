@@ -42,7 +42,7 @@ function close_fun(paramp) {
 }
 
 window.onload = function() {
-  console.log("page is loaded first time");
+  //console.log("page is loaded first time");
   var db = firebase.firestore();
   db.collection("users")
     .where("email", "==", current_user)
@@ -79,7 +79,7 @@ window.onload = function() {
                   .collection("todos").doc(doci.id)
                   .delete()
                   .then(function() {
-                    console.log("Document successfully deleted!");
+                    //console.log("Document successfully deleted!");
                   })
                   .catch(function(error) {
                     console.error("Error removing document: ", error);
@@ -120,7 +120,7 @@ window.onload = function() {
                                 checked: "1"
                               })
                               .then(function() {
-                                console.log("updated  yess");
+                                //console.log("updated  yess");
                               });
                           } else {
                             refrence
@@ -129,7 +129,7 @@ window.onload = function() {
                                 checked: "0"
                               })
                               .then(function() {
-                                console.log("updated  yess");
+                                //console.log("updated  yess");
                               });
                           }
                         }
@@ -138,7 +138,7 @@ window.onload = function() {
                 });
               })
               .catch(function(error) {
-                console.log("cannnot find username with ur username");
+                //console.log("cannnot find username with ur username");
               });
           }
         },
@@ -146,7 +146,7 @@ window.onload = function() {
       );
     })
     .catch(function(error) {
-      console.log("cannnot find username with ur username");
+      //console.log("cannnot find username with ur username");
     });
 };
 //onload function (anonymous) ends
@@ -218,7 +218,7 @@ function addfun() {
                 .collection("todos").doc(doci.id)
                 .delete()
                 .then(function() {
-                  console.log("Document successfully deleted!");
+                  //console.log("Document successfully deleted!");
                 })
                 .catch(function(error) {
                   console.error("Error removing document: ", error);
@@ -234,7 +234,7 @@ function addfun() {
         });
     })
     .catch(function(error) {
-      console.log("cannnot find username with ur username");
+      //console.log("cannnot find username with ur username");
     });
   // uploading finished
 }

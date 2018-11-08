@@ -5,16 +5,16 @@ let firsttime=1;
         email=document.getElementById('username').value;
         password=document.getElementById('password').value;
       
-        if(email!="" || password!=""){
+        if(email!="" && password!=""){
           var db = firebase.firestore();
           //---------------------------------------//
           var stopping=9;
-          console.log("before " ,stopping);
+          //console.log("before " ,stopping);
             db.collection("users").get().then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                   // doc.data() is never undefined for query doc snapshots
                   if(email==doc.data().email && password==doc.data().password){
-                      console.log("found data in database... already present" , doc.data());
+                      //console.log("found data in database... already present" , doc.data());
                       stopping=1;
                     }
                 });
@@ -42,6 +42,7 @@ let firsttime=1;
         }
         else{
             alert("Username or password empty");
+            firsttime=1;
         }
        
       }      

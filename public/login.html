@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Ledgein</title>
+  <title>CtrlH</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -8,7 +8,7 @@
 <style>
   .box {
     width: 500px;
-    margin: 200px 0;
+    margin: 110px 0;
 }
 
 .shape1{
@@ -87,11 +87,15 @@
 
 .form {
     margin-left: 159px;
-    margin-top: 46px;
+    margin-top: 15px;
+}
+  body{
+  background-image: url("backg.jpg");
 }
   </style>
 </head>
 <body>
+  <br><br><center><h1 style="color:#FFFFFF">Login Page</h1></center>
 <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
@@ -106,15 +110,15 @@
                     <div class="float">
                         <form class="form" action="">
                             <div class="form-group">
-                                <label for="username" class="text-white">Username:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
+                                <label for="username" class="text-white">Username:</label>
+                                <input type="text" name="username " id="username" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="password" class="text-white">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
+                                <label for="password" class="text-white">Password:</label>
+                                <input type="text" name="password " id="password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <button type="button" name="Login" onclick="login()" class="btn btn-info btn-md">Log in</button>
+                                  <center><button type="button" name="Login" onclick="login()" class="btn btn-info btn-md">Log in</button></center>
                             </div>
                         </form>
                     </div>
@@ -122,10 +126,10 @@
             </div>
         </div>
     </div>
-    <h1><p id="Errorinfo"></p></h1>
-    <br><br>
-    <h1>Or signup if you don't have account with us<h1>
-    <a href="signup.html">Sign Up</a>
+    <br>
+    <center><h3 style="color : red"><p id="Errorinfo"></p></h3><center>
+    <center><h3>Or signup if you don't have account with us<h3><a style="color : white" href="signup.html">Sign Up</a></center>
+
     <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>

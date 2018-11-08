@@ -36,49 +36,6 @@ function clean(parameter){
 
 //HOW the heck other list element gets checked when it's not set
 // Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-     ev.target.classList.toggle('checked');
-     let clean_check=clean(ev.target.innerHTML);
-
-     // upaating checked to firebase
-     var db=firebase.firestore();
-     db.collection("users").where("email", "==", current_user)
-     .get()
-     .then(function(querySnapshot){
-         querySnapshot.forEach(function(doc) {
-           var refrence=db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos");
-           db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
-               .then(function(querySnapshot) {
-                     querySnapshot.forEach(function(doc) {
-                      if(doc.data().content==clean_check){
-                        if(doc.data().checked=="0"){
-                          refrence.doc(doc.id).update({
-                              "checked" : "1"
-                          }).then(function(){
-                            console.log("updated  yess");
-                          });
-                        }
-                        else{
-                          refrence.doc(doc.id).update({
-                              "checked" : "0"
-                          }).then(function(){
-                            console.log("updated  yess");
-                          });
-                        }
-
-                      }
-
-                     })
-                });
-         });
-      })
-     .catch(function(error) {
-       console.log("cannnot find username with ur username");
-     });
-  }
-}, false);
 
 function close_fun(paramp){
   alert(paramp.data().content);
@@ -101,6 +58,7 @@ window.onload=function () {
                       var inputValue = doci.data().content;
                       var t = document.createTextNode(inputValue);
                       li.appendChild(t);
+                      li.checked='true';
                       document.getElementById("myList").appendChild(li);
                       var span = document.createElement("SPAN");
                       //var txt = document.createTextNode("\u00D7");
@@ -126,6 +84,53 @@ window.onload=function () {
                   })
              });
       });
+      var list = document.querySelector('ul');
+
+      list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+           ev.target.classList.toggle('checked');
+           let clean_check=clean(ev.target.innerHTML);
+
+           // upaating checked to firebase
+           var db=firebase.firestore();
+           db.collection("users").where("email", "==", current_user)
+           .get()
+           .then(function(querySnapshot){
+               querySnapshot.forEach(function(doc) {
+                 var refrence=db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos");
+                 db.collection("users").doc(doc.id).collection("timestamp").doc(timestamp).collection("todos").get()
+                     .then(function(querySnapshot) {
+                           querySnapshot.forEach(function(doc) {
+                            if(doc.data().content==clean_check){
+                              if(doc.data().checked=="0"){
+                                // 0 means not completed
+                                refrence.doc(doc.id).update({
+                                    "checked" : "1"
+                                }).then(function(){
+                                  console.log("updated  yess");
+                                });
+                              }
+                              else{
+                                refrence.doc(doc.id).update({
+                                    "checked" : "0"
+                                }).then(function(){
+                                  console.log("updated  yess");
+                                });
+                              }
+
+                            }
+
+                           })
+                      });
+               });
+            })
+           .catch(function(error) {
+             console.log("cannnot find username with ur username");
+           });
+        }
+      }, false);
+
+
    })
   .catch(function(error) {
     console.log("cannnot find username with ur username");

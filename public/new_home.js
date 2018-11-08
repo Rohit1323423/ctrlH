@@ -197,6 +197,7 @@ function addfun() {
     .where("email", "==", current_user)
     .get()
     .then(function(querySnapshot) {
+
       querySnapshot.forEach(function(doc) {
         db.collection("users")
           .doc(doc.id)
@@ -207,13 +208,30 @@ function addfun() {
             checked: "0",
             content: inputValue
           })
-          .then(function() {
-            console.log("your current to do went to database");
+          .then(function(doci) {
+            span.onclick = function() {
+              var div = this.parentElement;
+              div.style.display = "none";
+              let toremove = clean(div.innerHTML);
+              db.collection("users").doc(doc.id)
+                .collection("timestamp").doc(timestamp)
+                .collection("todos").doc(doci.id)
+                .delete()
+                .then(function() {
+                  console.log("Document successfully deleted!");
+                })
+                .catch(function(error) {
+                  console.error("Error removing document: ", error);
+                });
+            };            
+
           })
           .catch(function(error) {
             console.error("Error writing document: ", error);
           });
-      });
+      
+          
+        });
     })
     .catch(function(error) {
       console.log("cannnot find username with ur username");

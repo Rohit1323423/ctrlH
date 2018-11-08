@@ -1,7 +1,7 @@
 
 // Create a "close" button and append it to each list item
 // this will be done for each and every element of li items.
-var current_user = "a";
+var current_user = sessionStorage.getItem('userid');
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
